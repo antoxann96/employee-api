@@ -1,4 +1,4 @@
-var sendgridAuth = require('../../config/authData/sendgrid.js')
+// var sendgridAuth = require('../../config/authData/sendgrid.js')
 var mailingParams = {
     company: "http://localhost:1337/confirm/company/",
     employee: "http://localhost:1337/confirm/employee/",
