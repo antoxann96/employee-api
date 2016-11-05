@@ -1,7 +1,7 @@
 language: node_js
 
 node_js:
-  - stable
+  - "5"
 
 before_script:
   - git config --global user.email "anton.netudykhata@uptech.team"

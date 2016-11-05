@@ -36,20 +36,7 @@
     "sails-disk": "~0.10.0",
     "sails-mongo": "^0.11.6",
     "sendgrid": "^2.0.0",
-    "skipper-gridfs": "^0.5.3"
-  },
-  "scripts": {
-    "debug": "node debug app.js",
-    "start": "node app.js"
-  },
-  "main": "app.js",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/anonymous node/sails user/Employee.git"
-  },
-  "author": "anonymous node/sails user",
-  "license": "",
-  "devDependencies": {
+    "skipper-gridfs": "^0.5.3",
     "assert": "^1.3.0",
     "chai": "^3.5.0",
     "grunt-concurrent": "^2.1.0",
@@ -64,5 +51,16 @@
     "mocha": "^2.4.4",
     "sails-hook-autoreload": "^0.13.0",
     "sinon": "^1.17.3"
-  }
+  },
+  "scripts": {
+    "debug": "node debug app.js",
+    "start": "node app.js"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/anonymous node/sails user/Employee.git"
+  },
+  "author": "anonymous node/sails user",
+  "license": ""
 }
