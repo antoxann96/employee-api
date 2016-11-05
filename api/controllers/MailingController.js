@@ -4,7 +4,7 @@ var mailingParams = {
     employee: "http://localhost:1337/confirm/employee/",
     mailFrom: 'noreply@employee.com.ua'
 }
-var sendgrid = require("sendgrid")(sendgridAuth.username, sendgridAuth.password);
+// var sendgrid = require("sendgrid")(sendgridAuth.username, sendgridAuth.password);
 module.exports = {
     sendConfirmLetter: sendConfirmLetter
 }
@@ -17,11 +17,11 @@ function sendConfirmLetter(user, userId, emailTo, cb) {
         text:     "Confirm account activation "+mailingParams[user]+userId
     };
 
-    sendgrid.send(email, function(err, res) {
-        if (err) { 
-            return cb(err)
-        }
-        return cb(null, res);
-    });
+    // sendgrid.send(email, function(err, res) {
+    //     if (err) { 
+    //         return cb(err)
+    //     }
+    //     return cb(null, res);
+    // });
 }
 
