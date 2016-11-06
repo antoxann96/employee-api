@@ -7,5 +7,4 @@ module.exports = function (grunt) {
         };
         grunt.file.write("./version.json", JSON.stringify(versionObj));
     });    
-    grunt.task.run('git-describe');
 };
