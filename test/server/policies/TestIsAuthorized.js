@@ -7,51 +7,51 @@ var authorizationCntrl = require('../../../api/controllers/AuthorizationControll
 
 describe('/api/policies/isAuthorized', function() {
     var credentials;
-    before(function(done) {
-        credentialsCntrl.createCredentials(testData.credentials, function(err, res) {
-            if(err) {
-                return done(err);
-            }
-            credentials = res;
-            done();
-        })
+    // before(function(done) {
+    //     credentialsCntrl.createCredentials(testData.credentials, function(err, res) {
+    //         if(err) {
+    //             return done(err);
+    //         }
+    //         credentials = res;
+    //         done();
+    //     })
 
-    })
+    // })
     // describe.skip('status is notConfirmed', function() {
     //     it('should return forbidden', function(done) {
     //         // isAuthorized.
     //     })
     // })
-    describe('token is valid', function(){
-        it('should pass request farther', function(done) {
-            var forbidden = sinon.spy(cb);
-            var json = sinon.spy(cb);
-            var next = sinon.spy(cb);
-            isAuthorized(testData.validReq, {json:json, forbidden:forbidden}, next);
-            function cb() {
-                assert(!json.called);
-                assert(!forbidden.called);
-                assert(next.called);
-                done();
-            }
-        })
-        it('should update last_activity', function(done) {
-            var forbidden = sinon.spy(cb);
-            var json = sinon.spy(cb);
-            var next = sinon.spy(cb);
-            isAuthorized(testData.validReq, {json:json, forbidden:forbidden}, next);
-            function cb() {
-                assert(!json.called);
-                assert(!forbidden.called);
-                assert(next.called);
-                requestsDB.findOne('Credentials', {token:testData.credentials.token}, function(err, res) {
-                    assert.notEqual(testData.credentials.last_activity, res.last_activity)
-                    done();
-                })
+    // describe('token is valid', function(){
+    //     it('should pass request farther', function(done) {
+    //         var forbidden = sinon.spy(cb);
+    //         var json = sinon.spy(cb);
+    //         var next = sinon.spy(cb);
+    //         isAuthorized(testData.validReq, {json:json, forbidden:forbidden}, next);
+    //         function cb() {
+    //             assert(!json.called);
+    //             assert(!forbidden.called);
+    //             assert(next.called);
+    //             done();
+    //         }
+    //     })
+    //     it('should update last_activity', function(done) {
+    //         var forbidden = sinon.spy(cb);
+    //         var json = sinon.spy(cb);
+    //         var next = sinon.spy(cb);
+    //         isAuthorized(testData.validReq, {json:json, forbidden:forbidden}, next);
+    //         function cb() {
+    //             assert(!json.called);
+    //             assert(!forbidden.called);
+    //             assert(next.called);
+    //             requestsDB.findOne('Credentials', {token:testData.credentials.token}, function(err, res) {
+    //                 assert.notEqual(testData.credentials.last_activity, res.last_activity)
+    //                 done();
+    //             })
                 
-            }
-        })
-    })
+    //         }
+    //     })
+    // })
     describe('token is expired', function(){
         it('should return forbidden', function(done) {
             var expiredDate = new Date(testData.credentials.last_activity);

@@ -26,7 +26,8 @@ module.exports.connections = {
         dbName: 'employeeDB_TEST'
     },
     dev: {
-        host: 'mongodb://127.0.0.1/',
+        // host: 'mongodb://127.0.0.1/',
+        host: 'mongodb://employee:password@ds139567.mlab.com:39567/employee',
         dbName: 'employeeDB'
     }
 

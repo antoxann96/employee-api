@@ -7,13 +7,13 @@ var testData = {
     credentials: [{
         'client_id':1,
         'client_type':'company',
-        'email': 'mponsfagnbud@fgbosn.su',
+        'email': Math.random().toString(36).substring(7)+'@fgbosn.su',
         'password': 'aASd2fdsf4a3',
         'status':'notConfirmed'
     }, {
         'client_id':2,
         'client_type':'employee',
-        'email': '2mponsfagnbud@fgbosn.su',
+        'email': Math.random().toString(36).substring(7)+'@fgbosn.su',
         'password': '2aASd2fdsf4a3',
         'status':'notConfirmed'
     }]

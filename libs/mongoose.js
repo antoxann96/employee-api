@@ -21,7 +21,8 @@ if(dbConf.mode === 'test') {
     mongooseModels['testCollection'] = mongoose.model('testCollection', schema);
 }
 
-mongoose.connect(dbData.host+dbData.dbName, function(err) {
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://employee:password@ds139567.mlab.com:39567/employee', function(err) {
     if(err) {
         console.log('Error: ', err);
     }

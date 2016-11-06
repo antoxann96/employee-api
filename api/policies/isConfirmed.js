@@ -11,7 +11,7 @@ module.exports = function(req, res, next) {
                     email: req.body.email
                 }
                 requestsDB.findOne('Credentials', findCriteria, function(err,response){
-
+                    console.log(response);
                     if (err) {
                         return res.json({ success: false, msg: '[isConfirmed policy] Find credentials error'});
                     } else if(response === null) {
