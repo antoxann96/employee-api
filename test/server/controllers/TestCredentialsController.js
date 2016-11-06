@@ -7,19 +7,29 @@ var testData = {
     credentials: [{
         'client_id':1,
         'client_type':'company',
-        'email': Math.random().toString(36).substring(7)+'@fgbosn.su',
+        'email': 'mponsfagnbud@fgbosn.su',
         'password': 'aASd2fdsf4a3',
         'status':'notConfirmed'
     }, {
         'client_id':2,
         'client_type':'employee',
-        'email': Math.random().toString(36).substring(7)+'@fgbosn.su',
+        'email': '2mponsfagnbud@fgbosn.su',
         'password': '2aASd2fdsf4a3',
         'status':'notConfirmed'
     }]
 };
 
 describe('api/controllers/CredentialsController', function() {
+    before(function(done) {
+        testData.credentials.forEach(function(cred) {
+            credentialsCntrl.deleteCredentials(cred);
+        });
+        
+        setTimeout(function () {
+          done(); 
+        }, 2000)
+    })
+
     describe('createCredentials', function() {
         testData.credentials.forEach(function(cred) {
             it('should create credentials', function(done) {

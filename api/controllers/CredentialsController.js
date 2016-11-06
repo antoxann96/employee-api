@@ -5,7 +5,8 @@ var requestsDB = require('../../api/services/requestsDB.js');
 module.exports = {
     createCredentials: createCredentials,
     confirmEmail: confirmEmail,
-    getCredentialsByToken: getCredentialsByToken
+    getCredentialsByToken: getCredentialsByToken,
+    deleteCredentials: deleteCredentials
 }
 
 function createCredentials (obj, callback){
@@ -24,6 +25,15 @@ function createCredentials (obj, callback){
             callback(null, res)
         })
     }
+
+function deleteCredentials (obj) {
+    requestsDB.findOne('Credentials', {'email': obj.email}, function(err, response){
+        if (err || response == null) {
+            return null;
+        }
+        response.remove();
+    })
+}
 
 function confirmEmail(req, res){
 
