@@ -63,7 +63,8 @@ module.exports.routes = {
 
   'PUT /apply': 'ApplyController.createApply',
   'GET /applies/:advertId': 'ApplyController.getApplicatns',
-  'PATCH /applies': 'ApplyController.changeApplicationStatus'
+  'PATCH /applies': 'ApplyController.changeApplicationStatus',
+  'GET /version': 'GenericController.getVersions',
 
   /***************************************************************************
   *                                                                          *
