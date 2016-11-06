@@ -59,4 +59,22 @@ describe('twitstat MOCK tests', function () {
         });
     });
 
+    it('should response with HIGH popul if url sended 55 times', function (done) {
+        var expectedEndpoint = 'http://urls.api.twitter.com/1/urls/count.json?url=other-url.com';
+        var body = JSON.stringify({
+            count: 55,
+            url: "http://other-url.com/"
+        });
+        request.withArgs(expectedEndpoint).yields(null, null, body);
+
+        twitstat.getPopularity('other-url.com', function (err, data) {
+            expect(err).to.be.null;
+            expect(data).to.equal(JSON.stringify({
+                "url": "http://other-url.com/",
+                "popularity": "HIGH"
+            }));
+            done();
+        });
+    });
+
 });
