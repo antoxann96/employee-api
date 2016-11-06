@@ -1,3 +1,9 @@
+# To RUN project you need to:
+1) git clone project
+2) Install NodeJs to your computer (https://nodejs.org/en/)
+3) npm install
+4) Run one of instructions below 
+
 # Employee
 
 An application for students to help them find work or courses!!!!
