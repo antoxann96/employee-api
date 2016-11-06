@@ -65,5 +65,8 @@
     "url": "git://github.com/anonymous node/sails user/Employee.git"
   },
   "author": "anonymous node/sails user",
-  "license": ""
+  "license": "",
+  "devDependencies": {
+    "jshint": "^2.9.4"
+  }
 }

@@ -7,9 +7,12 @@ before_script:
   - git config --global user.email "anton.netudykhata@uptech.team"
   - git config --global user.name "Anton Netudykhata"
   - npm install -g grunt
+  - npm install -g jshint
 
 
-script: grunt testServer 
+script: 
+  - grunt testServer
+  - jshint **/*.js 
 
 notifications:
   slack:
