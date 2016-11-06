@@ -28,5 +28,17 @@ describe('twitstat MOCK tests', function () {
             done();
         });
     });
+	
+	it('should call the error callback when something went wrong', function(done) {
+        var expectedEndpoint = 'http://urls.api.twitter.com/1/urls/count.json?url=idmb.com';
+        var expectedError = new Error('Not found');
+        request.withArgs(expectedEndpoint).yields(expectedError, null, null);
+
+        twitstat.getPopularity('idmb.com', function(err, data) {
+            expect(err).to.equal(expectedError);
+            expect(data).to.be.null;
+            done();
+        });
+    });
 
 });
