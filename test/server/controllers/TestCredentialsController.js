@@ -47,6 +47,19 @@ describe('api/controllers/CredentialsController', function() {
             })
         })
     })
+	
+	describe('deleteCredentials', function () { 
+		it('should delete credentials', function(done) { 
+			credentialsCntrl.deleteCredentials(testData.credentials[1]); 
+			setTimeout(function () { 
+				requestsDB.findOne('Credentials', {email: testData.credentials[1].email}, function(err, result) { 
+				assert.equal(err, null); 
+				assert.equal(result, null) 
+				done() 
+				}) 
+			}, 2000) 
+		}) 
+	})
 
     
     // describe('confirmEmail', function() {
