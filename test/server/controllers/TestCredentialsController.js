@@ -46,35 +46,35 @@ describe('api/controllers/CredentialsController', function() {
                 })
             })
         })
-        
     })
 
-    describe('confirmEmail', function() {
-        testData.credentials.forEach(function(cred) {
-            it('should confirm email', function(done) {
-                var req = {
-                    param: function(param) {
-                            var obj = {
-                                clientType: cred.client_type,
-                                clientId: cred.client_id
-                                };
-                            return obj[param];
-                        }
-                }
-                var res = {
-                    redirect: sinon.spy(cb)
-                }
-                credentialsCntrl.confirmEmail(req, res)
-                function cb(){
-                    assert(res.redirect.called);
-                    assert.notEqual(res.redirect.args[0][0], '500');
-                    requestsDB.findOne('Credentials', {email: cred.email}, function(err, result){
-                        assert.equal(err, null);
-                        assert.equal('notActivated', result.status)
-                        done()
-                    })
-                }
-            })
-        })      
-    })
+    
+    // describe('confirmEmail', function() {
+    //     testData.credentials.forEach(function(cred) {
+    //         it('should confirm email', function(done) {
+    //             var req = {
+    //                 param: function(param) {
+    //                         var obj = {
+    //                             clientType: cred.client_type,
+    //                             clientId: cred.client_id
+    //                             };
+    //                         return obj[param];
+    //                     }
+    //             }
+    //             var res = {
+    //                 redirect: sinon.spy(cb)
+    //             }
+    //             credentialsCntrl.confirmEmail(req, res)
+    //             function cb(){
+    //                 assert(res.redirect.called);
+    //                 assert.notEqual(res.redirect.args[0][0], '500');
+    //                 requestsDB.findOne('Credentials', {email: cred.email}, function(err, result){
+    //                     assert.equal(err, null);
+    //                     assert.equal('notActivated', result.status)
+    //                     done()
+    //                 })
+    //             }
+    //         })
+    //     })      
+    // })
 })
