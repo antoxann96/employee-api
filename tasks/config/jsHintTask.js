@@ -1,14 +1,13 @@
 module.exports = function(grunt) {
 
-    grunt.config.set('jsHintTask', {
-        test: {
-            options: {
-              jshintrc: '.jshintrc'
-            },
-            all: [
-              '!node_modules/**',
-              '!libs/**'
-            ]
+    grunt.config.set('jshint', {
+        jshint: {
+              options: {
+                jshintrc: '.jshintrc',
+                require
+              },
+              all: [ 'Gruntfile.js'
+              ]
         }
 
     });
