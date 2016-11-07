@@ -2,4 +2,3 @@ first commit
 change in master
 added feature
 feature 2
-one more changing to feature
