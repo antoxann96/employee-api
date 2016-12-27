@@ -22,7 +22,7 @@ if(dbConf.mode === 'test') {
 }
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://employee:password@ds139567.mlab.com:39567/employee', function(err) {
+mongoose.connect('mongodb://employee:12345678@ds145138.mlab.com:45138/employee1', function(err) {
     if(err) {
         console.log('Error: ', err);
     }
