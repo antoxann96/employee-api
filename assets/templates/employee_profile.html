@@ -1,0 +1,148 @@
+<div class="container employee-profile">
+    <div class="row">
+        <div class="col-xs-2 col-xs-offset-1">
+            <div class="row">
+                <h3>My profile</h3>
+            </div>
+            <div class="row text-center"><img class="image" ng-src="http://localhost:1337/image/{{profile.image}}" alt="employee photo"></div>
+            <div class="row texto">
+                <h4 class="lang-marging">Availability</h4>
+            </div>
+            <div class="row">
+                <a href="" ng-click="setAvailability()" ng-show="isAvailable">(Set availability)</a>
+                <div ng-if="setAvailable1">
+                    <a href="" ng-click="setAvailability('yes')">Set Available</a>
+                    <a href="" ng-click="setAvailability('no')">Set Not Available</a>
+                </div>
+                <h4 ng-if="setAvailable2" class="lang-marging">{{available}} <a href="" ng-click="changeAvailability()" class="href-size" ng-hide="isCompany">(Change)</a></h4>
+            </div>
+            <div class="row texto">
+                <h4>Languages</h4>
+            </div>
+            <div class="row size-lang" ng-repeat="lang in profile.languages track by $index">
+                <strong>{{lang.name}}</strong>:  {{lang.level}} <span class="glyphicon glyphicon-remove height" ng-click="removeLang($index)" ng-hide="isCompany"></span>
+            </div>
+            <div class="row" ng-click="openLanguagesModal()" ng-hide="isCompany">
+                <a href="">Add languages</a>
+            </div>
+        </div>
+        <div class="col-xs-7 col-xs-offset-1">
+            <div class="row top-name">
+                <h3 class="no-margin"><strong>{{profile.firstName}} {{profile.lastName}}</strong></h3>
+            </div>
+            <div class="row">
+                <h5 class="without-margin">{{profile.birthDate | date:'mediumDate'}}</h5>
+            </div>
+            <div class="row">
+                <h4 class="without-margin"><span class="glyphicon glyphicon-map-marker"></span>{{profile.currentCity}}, Ukraine</h4>
+            </div>
+            <div class="row back-col special">
+                <h4>Skills <a href="" ng-click="openAddSkillsModal()" ng-hide="isCompany">Add Skills</a></h4>
+            </div>
+            <div class="row white-screen" ng-repeat="skill in profile.skills">
+                <div class="row">
+                    <h5 class="col-xs-3"><strong>{{skill.name}}</strong></h5>
+                    <h6 class="col-xs-9">{{skill.description}}</h6>
+                </div>
+            </div>
+            <!-- Work experience -->
+            <div class="row back-col">
+                <h4>Work Experience <a href="" ng-click="openWorkExperienceModal()" ng-hide="isCompany">Add</a></h4>
+            </div>
+            <div class="row white-screen" ng-repeat="experience in profile.workExperience">
+                <div class="row">
+                    <h5 class="col-xs-3 margin"><strong>{{experience.title}}</strong></h5>
+                </div>
+                <div class="row">
+                    <h6 class="col-xs-12 margin-grey">{{experience.yearsFrom | date:'MMM yyyy'}} - {{experience.yearsTo | date:'MMM yyyy'}}</h6>
+                </div>
+                <div class="row">
+                    <h6 class="col-xs-8 margin-special">{{experience.degree}}</h6>
+                </div>
+            </div>
+            <!-- Education -->
+            <div class="row back-col">
+                <h4 style=>Education <a href="" ng-click="openEducationModal()" ng-hide="isCompany">Add </a></h4>
+            </div>
+            <div class="row white-screen" ng-repeat="edu in profile.education">
+                <div class="row">
+                    <div class="col-xs-3 grey-color">
+                        <h5>{{edu.yearsFrom | date:'yyyy'}} - {{edu.yearsTo | date:'yyyy'}}</h5>
+                    </div>
+                    <div class="col-xs-9">
+                        <h5><strong>{{edu.uni}}</strong></h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <h5 class="col-xs-offset-3 col-xs-9">{{edu.faculty}}</h5>
+                </div>
+                <div class="row">
+                    <h6 class="col-xs-offset-3 col-xs-9">{{edu.degree}}</h6>
+                </div>
+            </div>
+            <!-- Potrfolio -->
+            <div class="row back-col">
+                <h4>Portfolios <a href="" ng-click="openPortfolioModal()" ng-hide="isCompany">Add </a></h4>
+            </div>
+            <div class="row white-screen" ng-repeat="port in profile.portfolio">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <img ng-src="http://localhost:1337/image/{{port.image}}" alt="portfolio image" height="75" width="75">
+                    </div>
+                    <div class="col-xs-9">
+                        <div class="row">
+                            <h5 class="col-xs-12"><strong>{{port.title}}</strong></h5>
+                        </div>
+                        <div class="row">
+                            <h5 class="col-xs-10 portfolio">{{port.description}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--    Courses     -->
+            <div class="row back-col">
+                <h4>Courses <a href="" ng-click="openCoursesModal()" ng-hide="isCompany">Add </a></h4>
+            </div>
+            <div class="row white-screen" ng-repeat="course in profile.achievements">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="row">
+                            <h5 class="col-xs-12 grey-color">{{course.yearsFrom | date:'MMM yyyy'}} - {{course.yearsTo | date:'MMM yyyy'}}</h5>
+                        </div>
+                        <div class="row img-padd">
+                            <img src="http://mrjose.ph/blog/wp-content/uploads/2013/12/document_list-512.png" height="35" width="35">
+                        </div>
+                    </div>
+                    <div class="col-xs-9">
+                        <div class="row">
+                            <h5 class="col-xs-12"><strong>{{course.title}}</strong></h5>
+                        </div>
+                        <div class="row">
+                            <h5 class="col-xs-10">{{course.description}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row back-col">
+                <h4>Applies</h4>
+            </div>
+            <div class="row white-screen" ng-repeat="message in messages">
+                <div class="row" style="display: table">
+                    <div class="col-xs-9">
+                        <div class="row">
+                            <h5 class="col-xs-12"><strong>{{message.advertTitle}}</strong></h5>
+                        </div>
+                    </div>                    
+                    <div class="col-xs-9">
+                            <strong>TO:</strong> {{message.companyName}}
+                    </div>
+                    <div class="col-xs-12">
+                            <strong>Cover Letter:</strong> {{message.letter}}
+                    </div>
+                </div>
+                <hr>
+            </div>
+
+        </div>
+    </div>
+</div>

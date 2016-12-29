@@ -1,0 +1,162 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-10 col-centered">
+			<div class="row">
+				<div class="col-xs-11  page-title">
+					Employees List
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-3 search-filter">
+							<!-- Employment type -->
+							<div class="row">
+								<div class="col-xs-12 section-name">
+									<h4>Availability</h4>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									<div class="checkboxes">
+										<div class="checkbox">
+						                    <input type="checkbox" ng-model="availability.yes" id="available">
+						                    
+											<label for="available">
+												<span>Available</span>
+											</label>
+										</div>
+										<div class="checkbox">
+						                    <input type="checkbox" ng-model="availability.no" id="not_available">
+						                    
+											<label for="not_available">
+												<span>Not available</span>
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- Cities -->
+							<div class="row">
+								<div class="col-xs-12 section-name">
+									<h4>Select City</h4>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									<input type="text" ng-model="citySearchStr" typeahead-on-select="selectCity($item, $model, $label, $event)" uib-typeahead="city for city in cities | filter:$viewValue" class="full-width input-grey" placeholder="Add city...">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									<div ng-repeat="city in selectedCities track by $index" class="label-grey full-width">
+										<span class="glyphicon glyphicon-chevron-right"></span>
+										{{city}}
+										<span ng-click="removeCity($index)" class="glyphicon glyphicon-remove"></span>
+									</div>
+								</div>
+							</div>
+
+							<!-- Skills -->
+							<div class="row">
+								<div class="col-xs-12 section-name">
+									<h4>Select Skills</h4>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									<input type="text" ng-model="skillSearchStr" typeahead-on-select="selectSkill($item, $model, $label, $event)" uib-typeahead="skill.name for skill in getSkills($viewValue)" class="full-width input-grey" placeholder="Add skill...">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									<div ng-repeat="skill in selectedSkills track by $index" class="label-grey full-width">
+										<span class="glyphicon glyphicon-chevron-right"></span>
+										{{skill}}
+										<span ng-click="removeSkill($index)" class="glyphicon glyphicon-remove"></span>
+									</div>
+								</div>
+							</div>
+							<!-- Languages -->
+							<div class="row">
+								<div class="col-xs-12 section-name">
+									<h4>Select Languages</h4>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									<input type="text" ng-model="languageSearchStr" typeahead-on-select="selectLanguage($item, $model, $label, $event)" uib-typeahead="language for language in languages | filter:$viewValue" class="full-width input-grey" placeholder="Add language...">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									<div ng-repeat="language in selectedLanguages track by $index" class="label-grey full-width">
+										<span class="glyphicon glyphicon-chevron-right"></span>
+										{{language}}
+										<span ng-click="removeLanguage($index)" class="glyphicon glyphicon-remove"></span>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									<button ng-click="applyFilter()" class="btn btn-blue search-btn full-width">Search</button>
+								</div>
+							</div>
+				</div>
+
+				<div class="col-xs-9">
+					<div class="row">
+						<div class="col-xs-11 col-centered">					
+							<div class="row search-header">
+									Search Result
+							</div>				
+							<div class="row" style="background-color:#fafdfe" infinite-scroll="showMore()"
+                         infinite-scroll-immediate-check="false" infinite-scroll-disabled="isInfiniteDisabled">
+								<div class="col-xs-12 search-list">
+
+									<div ng-repeat="employee in employees" class="row search-res">
+										<div class="col-xs-12">
+											<div class="row">
+												<div class="col-xs-12 title"><a ng-href="#/employee/{{employee._id}}">{{employee.firstName}} {{employee.lastName}}</a></div>
+											</div>
+											<div class="row" style="display:flex">
+												<div class="col-xs-6 company">{{employee.currentCity}}</div>
+												<div class="col-xs-6 empl-type" style="float:right" ng-show="employee.availability">Available</div>
+												<div class="col-xs-6 empl-type" style="float:right" ng-show="!employee.availability">Not Available</div>
+											</div>
+											<div class="row" style="display:flex">
+												<div class="col-xs-12 descr">
+													{{employee.education[0].uni}}<div ng-show="employee.education.length > 1"> and more..</div>
+												</div>
+												<div class="col-xs-6 empl-type" style="float:right" ng-show="employee.education[0].yearsFrom && employee.education[0].yearsTo">{{employee.education[0].yearsFrom | date:'yyyy'}} - {{employee.education[0].yearsTo | date:'yyyy'}}</div>
+											</div>
+											<div class="row">
+												<div class="col-xs-12 descr">
+													{{employee.education[0].faculty}}<div ng-show="employee.education.length > 1"> and more..</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-xs-12 descr">
+													{{employee.education[0].degree}}<div ng-show="employee.education[0].length > 1"> and more..</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-xs-12 skills">
+													<span>Skills:</span>
+													<span ng-repeat="skill in employee.skills" class="skill" data-toggle="tooltip" data-placement="bottom" title="{{skill.description}}">{{skill.name}}</span>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-xs-12 bottom-border">
+													<hr>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

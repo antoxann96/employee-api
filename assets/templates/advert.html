@@ -1,0 +1,128 @@
+<div class="container">
+    <div class="row advert">
+        <div class="col-xs-10 col-centered">
+            <div class="row">
+                <div class="col-xs-3 filter">
+                    <!-- Company -->
+                    <div class="row">
+                        <div class="col-xs-12 section-name">
+                            Company
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 section-content">
+                            <span>{{advert.company.name}}</span>
+                        </div>
+                    </div>
+
+                    <!-- Closing date -->
+                    <div class="row">
+                        <div class="col-xs-12 section-name">
+                            Closing date
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 section-content">
+                            <span>{{advert.dateSelEnd | date}}</span>
+                        </div>
+                    </div>
+
+                    <!-- Cities -->
+                    <div class="row">
+                        <div class="col-xs-12 section-name">
+                            Cities
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 section-content">
+                            <span ng-repeat="city in advert.cities">{{city}}<span ng-show="$index < advert.cities.length-1">, </span></span>
+                        </div>
+                    </div>
+
+                    <!-- Is free -->
+                    <div class="row">
+                        <div class="col-xs-12 section-name">
+                            Is free
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 section-content">
+                            <span>{{advert.needPay ? 'No' : 'Yes'}}</span>
+                        </div>
+                    </div>
+
+                    <!-- Type of employment -->
+                    <div class="row">
+                        <div class="col-xs-12 section-name">
+                            Type of employment
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 section-content">
+                            <span ng-show="advert.emplType == 'underemployment'">Underemployment</span>
+                            <!-- <span ng-show="advert.emplType == 'underemployment'">Underemployment</span>
+                            <span ng-show="advert.emplType == 'underemployment'">Underemployment</span> -->
+                        </div>
+                    </div>
+
+                    <!-- Hours per week -->
+                    <div class="row">
+                        <div class="col-xs-12 section-name">
+                            Hours per week
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 section-content">
+                            <span ng-show="advert.hoursPerWeek == 'more_than_30'">More than 30</span>
+                            <!-- <span ng-show="advert.hoursPerWeek == 'more_than_30'">More than 30</span>
+                            <span ng-show="advert.hoursPerWeek == 'more_than_30'">More than 30</span> -->
+                        </div>
+                    </div>
+
+                    <!-- Salary / Grants -->
+                    <div class="row">
+                        <div class="col-xs-12 section-name">
+                            Salary / Grants
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 section-content">
+                            <span>{{advert.paid ? 'Yes' : 'No'}}</span>
+                        </div>
+                    </div>
+
+                           
+                </div>
+
+                <div class="col-xs-9">
+                    <div class="row">
+                        <div class="col-xs-12 title">
+                            <span>{{advert.title}}</span>
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col-xs-12 subcategory">
+                            <span>{{advert.subcategory}}</span>
+                        </div>
+                    </div>
+                    <div class="row white-section">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-12 descr">
+                                    <span>{{advert.description}}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 skills">
+                                    <span class="title">Skills: </span><span class="skill" ng-repeat="skill in advert.skills">{{skill}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button ng-if="companyType" class="btn btn-blue search-btn full-width respond-to-advert" ng-click="showAllApplyers()" ng-show="isTheSameCompany">Show Aplicants</button>
+                    <button ng-if="!companyType" ng-click="submitProposalModal(advert._id)" class="btn btn-blue search-btn full-width respond-to-advert">Apply</button>  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

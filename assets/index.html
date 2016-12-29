@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>New Sails App</title>
+
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+    <!--  
+        Stylesheets and Preprocessors
+        ==============================
+
+        You can always bring in CSS files manually with `<link>` tags, or asynchronously
+        using a solution like AMD (RequireJS).  Or, if you like, you can take advantage 
+        of Sails' conventional asset pipeline (boilerplate Gruntfile).
+
+        By default, stylesheets from your `assets/styles` folder are included
+        here automatically (between STYLES and STYLES END). Both CSS (.css) and LESS (.less)
+        are supported. In production, your styles will be minified and concatenated into
+        a single file.
+        
+        To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+        For example, here are a few things you could do:
+            
+            + Change the order of your CSS files
+            + Import stylesheets from other directories
+            + Use a different or additional preprocessor, like SASS, SCSS or Stylus
+    -->
+
+    <!--STYLES-->
+    <link rel="stylesheet" href="/styles/autocomplete.css">
+    <link rel="stylesheet" href="/styles/bootstrap.css">
+    <link rel="stylesheet" href="/styles/createAdvert.css">
+    <link rel="stylesheet" href="/styles/toaster.min.css">
+    <link rel="stylesheet" href="/styles/fonts.css">
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/font-awesome.min.css">
+    <!--STYLES END-->
+    </head>
+
+    <body ng-app="EmployeeApp">
+        <nav class="navbar navbar-brown navbar-default" ng-controller="HeaderCntrl" role="navigation" ng-cloak>
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed" type="button" class="navbar-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/#/"><img src="/images/logo.jpg" style="margin-top: -15px;"></a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div uib-collapse="navCollapsed" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/#/">Home</a>
+                        </li>
+                        <li ng-show="isLoggedIn">
+                            <a ng-href="{{getProfileLink()}}">Profile</a>
+                        </li>
+                        <li ng-show="isLoggedIn">
+                            <a href="/#/proposal">Proposals</a>
+                        </li>
+                        <li ng-show="isLoggedIn">
+                            <a href="/#/employees">Employees</a>
+                        </li>
+                        <li ng-show="isLoggedIn">
+                            <a href="/#/companies">Companies</a>
+                        </li>                        
+<!--                         <li ng-hide="isLoggedIn">
+                            <a href="/#/registration">Registration</a>
+                        </li> -->
+                        <li ng-hide="isLoggedIn">
+                            <a ng-click="openSignInModal()" style="cursor: pointer;">SignIn</a>
+                        </li>
+                        <li ng-show="isLoggedIn">                            
+                            <a href="#" ng-click="signout()">SignOut</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+        
+        <toaster-container></toaster-container>
+        <ng-view></ng-view>
+<!--         <div class="footer">
+            <div class="container">
+            </div>
+        </div> -->
+        <div class="footer" ng-controller="FooterCntrl">
+            <span class="project-version">Version: {{ctr.StaticDataSrvc.projectVersion}}</span>
+        </div>
+        <script type="text/ng-template" id="signInModal.html">
+        <div class="myModal login-form">
+            <div class="modal-header">
+                <h3 class="modal-title">Sign in</h3>
+            </div>
+            <div class="modal-body row body-padd">
+                <form name="signInFrom" novalidate id="signinForm" class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-3 field-lable">
+                                    Enter Email
+                                </div>
+                                <div class="col-md-8">
+                                    <input  class="form-control" type="email" ng-model="mail" name="mail" ng-class="{'has-error' : signInFrom.$submitted || signInFrom.mail.$touched}"  placeholder="email" required=""></input>
+                                    <div ng-show="signInFrom.$submitted || signInFrom.mail.$touched">
+                                        <div ng-show="signInFrom.mail.$error.required">Tell us your name.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-3 field-lable">
+                                    Enter Password
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="password" ng-model="password" class="form-control" placeholder="password" required=""></input>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h4>Or Sign In via Facebook</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <button type="button" class="btn btn-info btn-md" ng-click="signInViaFb()" style="width: 60%;">Log In with Facebook</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit" ng-click="signIn()" form="signinForm">Sign in</button>
+            </div>
+        </div>
+
+        </script>
+
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '1578674425763502',
+              xfbml      : true,
+              version    : 'v2.6'
+            });
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
+
+        <!--
+            Client-side Templates
+            ========================
+
+            HTML templates are important prerequisites of modern, rich client applications.
+            To work their magic, frameworks like Backbone, Angular, Ember, and Knockout require
+            that you load these templates client-side.
+
+            By default, your Gruntfile is configured to automatically load and precompile
+            client-side JST templates in your `assets/templates` folder, then
+            include them here automatically (between TEMPLATES and TEMPLATES END).
+
+            To customize this behavior to fit your needs, just edit `tasks/pipeline.js`.
+            For example, here are a few things you could do:
+
+            + Import templates from other directories
+            + Use a different template engine (handlebars, jade, dust, etc.)
+            + Internationalize your client-side templates using a server-side
+            stringfile before they're served.
+        -->
+
+        <!--TEMPLATES-->
+        
+        <!--TEMPLATES END-->
+
+
+        <!--
+
+            Client-side Javascript
+            ========================
+
+            You can always bring in JS files manually with `script` tags, or asynchronously
+            on the client using a solution like AMD (RequireJS).  Or, if you like, you can 
+            take advantage of Sails' conventional asset pipeline (boilerplate Gruntfile).
+
+            By default, files in your `assets/js` folder are included here
+            automatically (between SCRIPTS and SCRIPTS END).  Both JavaScript (.js) and
+            CoffeeScript (.coffee) are supported. In production, your scripts will be minified
+            and concatenated into a single file.
+
+            To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+            For example, here are a few things you could do:
+
+            + Change the order of your scripts
+            + Import scripts from other directories
+            + Use a different preprocessor, like TypeScript
+
+        -->
+
+        <!--SCRIPTS-->
+        <script src="/js/dependencies/jquery.js"></script>
+        <script src="/js/dependencies/angular.js"></script>
+        <script src="/js/dependencies/angular-route.js"></script>
+        <script src="/js/dependencies/angular-animate.min.js"></script>
+        <script src="/js/dependencies/ui-bootstrap-tpls-1.1.2.js"></script>
+        <script src="/js/dependencies/angular-file-upload.min.js"></script>
+        <script src="/js/dependencies/toaster.min.js"></script>
+        <script src="/js/dependencies/scriptjs.js"></script>
+        <script src="/js/dependencies/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+        <script src="/js/app.js"></script>
+        <script src="/js/directives/autocomplete/autocomplete.js"></script>
+        <script src="/js/directives/ng-thumb.js"></script>
+        <script src="/js/services/ConfigSrvc.js"></script>
+        <script src="/js/services/ReqHandlingSrvc.js"></script>
+        <script src="/js/services/PopUpSrvc.js"></script>
+        <script src="/js/services/AuthorizationSrvc.js"></script>
+        <script src="/js/services/SkillsSrvc.js"></script>
+        <script src="/js/services/AdvertSrvc.js"></script>
+        <script src="/js/services/FacebookLoginSrvc.js"></script>
+        <script src="/js/controllers/HeaderCntrl.js"></script>
+        <script src="/js/controllers/SignInCntrl.js"></script>
+        <script src="/js/controllers/FooterCntrl.js"></script>
+        <script src="/js/services/RegCompanySrvc.js"></script>
+        <script src="/js/services/RegEmployeeSrvc.js"></script>
+        <script src="/js/services/StaticDataSrvc.js"></script>
+        <!--SCRIPTS END-->
+    </body>
+</html>
